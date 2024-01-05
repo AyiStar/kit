@@ -1,2 +1,2 @@
-# kitgrad
-One day, the cute kitten will grow up to be a mighty tiger
+# kit: a cute deep learning framework
+> One day, the cute kit will grow up to be a mighty tiger
