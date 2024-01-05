@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.20)
 
 project(KitTen C CXX)
 
@@ -21,12 +21,8 @@ list(APPEND LINKER_LIBS ${pybind11_LIBRARIES})
 
 option(BUILD_TEST "Build C++ test binaries (need gtest and gbenchmark)" ON)
 if (BUILD_TEST)
-    include(FetchContent)
-    FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-    )
-    FetchContent_MakeAvailable(googletest)
+    enable_testing()
+    find_package(GTest REQUIRED)
     add_subdirectory(test)
 endif(BUILD_TEST)
 
