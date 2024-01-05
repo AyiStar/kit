@@ -43,3 +43,7 @@
 **/CMakeScripts
 **/compile_commands.json
 build/
+
+# IDEs
+.vscode/
+.vs/

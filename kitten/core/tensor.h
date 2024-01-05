@@ -1,7 +1,5 @@
 namespace kt {
 
-  class Tensor {
-
-};
+class Tensor {};
 
 } // namespace kt
