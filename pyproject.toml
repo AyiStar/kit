@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "kit"
+version = "0.0.1"
+description = "KIT Is Torch In Kidhood"
+authors = ["AyiStar <ayistar@outlook.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+pybind11 = "^2.11"
+numpy = "^1.26"
+
+[tool.poetry.group.dev.dependencies]
+python = ">=3.9"
+pybind11 = "^2.11"
+numpy = "^1.26"
+
+
+[[tool.poetry.source]]
+name = "ustc-mirrors"
+url = "https://mirrors.ustc.edu.cn/pypi/web/simple/"
+priority = "default"
+
+
+[[tool.poetry.source]]
+name = "tsinghua-mirrors"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "supplemental"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
