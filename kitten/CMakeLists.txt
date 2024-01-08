@@ -32,6 +32,7 @@ file(GLOB KITTEN_SRCS
 file(GLOB KITTEN_HEADERS
     core/*.h
 )
+include_directories(${PROJECT_SOURCE_DIR})
 add_library(kitten ${KITTEN_SRCS} ${KITTEN_HEADERS})
 
 
