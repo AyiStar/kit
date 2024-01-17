@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <core/tensor_impl.h>
+#include <kitten/core/tensor_impl.h>
 
 namespace kt {
 
