@@ -1,3 +1,3 @@
 #include <kitten/core/tensor.h>
 
-namespace kt {} // namespace kt
+namespace kitten {} // namespace kitten
