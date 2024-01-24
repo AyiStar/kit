@@ -1,5 +1,6 @@
+#include <kitten/core/allocator.h>
+#include <kitten/core/data_ptr.h>
 #include <kitten/core/data_type.h>
-#include <kitten/core/storage.h>
 
 namespace kitten {
 
