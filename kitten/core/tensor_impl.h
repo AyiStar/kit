@@ -1,3 +1,5 @@
+#pragma once
+
 #include <kitten/core/allocator.h>
 #include <kitten/core/data_ptr.h>
 #include <kitten/core/data_type.h>
