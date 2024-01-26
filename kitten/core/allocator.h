@@ -29,6 +29,6 @@ struct AllocatorRegisterer {
 #define REGISTER_ALLOCATOR(device, alloc)                                      \
   namespace {                                                                  \
   AllocatorRegisterer<device> g_allocator_registerer(alloc);                   \
-  }
+  } // namespace kitten
 
 } // namespace kitten
