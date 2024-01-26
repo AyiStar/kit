@@ -1,4 +1,5 @@
 Language: Cpp
 BasedOnStyle: LLVM
 
-InsertNewlineAtEOF: true
+# InsertNewlineAtEOF: true
+AlwaysBreakTemplateDeclarations: Yes
