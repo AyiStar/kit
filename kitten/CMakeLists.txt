@@ -8,7 +8,7 @@ file(GLOB KITTEN_SRCS
 file(GLOB KITTEN_HEADERS
     core/*.h
 )
-add_library(kitten ${KITTEN_SRCS} ${KITTEN_HEADERS})
+add_library(kitten SHARED ${KITTEN_SRCS} ${KITTEN_HEADERS})
 
 if (BUILD_TEST)
     add_subdirectory(test)

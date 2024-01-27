@@ -4,8 +4,6 @@
 #include <kitten/core/device_type.h>
 #include <kitten/core/meta.h>
 
-#include <iostream>
-
 namespace kitten {
 
 class Allocator {
@@ -21,11 +19,11 @@ template <DeviceType t>
 struct AllocatorRegisterer {
   explicit AllocatorRegisterer(Allocator *allocator) {
     set_allocator(t, allocator);
-    std::cout << "Allocator for device " << static_cast<int>(t)
-              << " has been set" << std::endl;
   }
 };
 
+// TODO use global variables for registration mechanism in static library will
+// cause problem. See https://sillycross.github.io/2022/10/02/2022-10-02/
 #define REGISTER_ALLOCATOR(device, alloc)                                      \
   namespace {                                                                  \
   AllocatorRegisterer<device> g_allocator_registerer(alloc);                   \
