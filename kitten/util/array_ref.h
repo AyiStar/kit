@@ -83,15 +83,6 @@ public:
     debugCheckNullptrInvariant();
   }
 
-  /// Construct an ArrayRef from a SmallVector. This is templated in order to
-  /// avoid instantiating SmallVectorTemplateCommon<T> whenever we
-  /// copy-construct an ArrayRef.
-  template <typename U>
-  /* implicit */ ArrayRef(const SmallVectorTemplateCommon<T, U> &Vec)
-      : Data(Vec.data()), Length(Vec.size()) {
-    debugCheckNullptrInvariant();
-  }
-
   template <typename Container,
             typename = std::enable_if_t<std::is_same_v<
                 std::remove_const_t<decltype(std::declval<Container>().data())>,

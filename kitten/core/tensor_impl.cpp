@@ -3,21 +3,30 @@
 
 #include <cassert>
 #include <cstddef>
+#include <initializer_list>
 
 namespace kitten {
-TensorImpl::TensorImpl(int64_t ne0, DataType data_type, DeviceType device_type)
-    : data_type_(data_type), device_type_(device_type),
-      allocator_(get_allocator(device_type)) {
+
+TensorImpl::TensorImpl(ArrayRef<int64_t> dims, DataType data_type,
+                       DeviceType device_type)
+    : data_type_(data_type), dtype_meta_(data_type), device_type_(device_type),
+      allocator_(get_allocator(device_type)),
+      ndim_(static_cast<int>(dims.size())) {
   // memory allocation
   assert(data_type == DataType::F32);
   assert(device_type == DeviceType::CPU);
   assert(allocator_ != nullptr);
-  size_t n_bytes = sizeof(float) * ne0;
+  size_t numel = 1;
+  for (size_t i = 0; i < ndim_; i++) {
+    dims_[i] = dims[i];
+    numel *= dims[i];
+  }
+  size_t n_bytes = dtype_meta_.size() * numel;
   auto allocated_data_ptr = allocator_->allocate(n_bytes);
   data_ptr_ = std::move(allocated_data_ptr);
-
-  // meta info log
-  ndim_ = 1;
-  dims_[0] = ne0;
 }
+
+TensorImpl::TensorImpl(int64_t dim0, DataType data_type, DeviceType device_type)
+    : TensorImpl(ArrayRef<int64_t>(dim0), data_type, device_type) {}
+
 } // namespace kitten

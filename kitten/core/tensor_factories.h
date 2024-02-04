@@ -1,12 +1,14 @@
 #include <kitten/core/data_type.h>
 #include <kitten/core/device_type.h>
 #include <kitten/core/tensor.h>
+#include <kitten/util/array_ref.h>
 
 #include <cstdint>
 
 namespace kitten {
 
 // TODO implementation of basic factories
+/*
 Tensor empty(int64_t dims[], DataType dtype = DataType::F32,
              DeviceType device = DeviceType::CPU);
 
@@ -27,5 +29,6 @@ Tensor rand(int64_t dims[], DataType dtype = DataType::F32,
 
 Tensor randn(int64_t dims[], DataType dtype = DataType::F32,
              DeviceType device = DeviceType::CPU);
+*/
 
 } // namespace kitten

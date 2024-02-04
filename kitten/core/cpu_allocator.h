@@ -12,11 +12,15 @@ public:
   CPUAllocator() { std::cout << "CPU Allocator constructed" << std::endl; }
   DataPtr allocate(std::size_t nbytes) {
     void *data = malloc(nbytes);
+    std::cout << "data allocated" << std::endl;
     return {data, DeviceType::CPU, data, &free_data};
   }
 
 private:
-  static void free_data(void *data) { free(data); }
+  static void free_data(void *data) {
+    free(data);
+    std::cout << "data freed" << std::endl;
+  }
 };
 
 Allocator *get_cpu_allocator();
