@@ -55,10 +55,7 @@ private:
   size_type Length;
 
   void debugCheckNullptrInvariant() {
-    TORCH_INTERNAL_ASSERT_DEBUG_ONLY(
-        Data != nullptr || Length == 0,
-        "created ArrayRef with nullptr and non-zero length! kitten::optional "
-        "relies on this being illegal");
+    assert(!(Data == nullptr && Length != 0));
   }
 
 public:

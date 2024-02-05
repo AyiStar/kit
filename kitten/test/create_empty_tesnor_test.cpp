@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <kitten/core/cpu_allocator.h>
 #include <kitten/core/tensor.h>
+#include <kitten/util/array_ref.h>
 
 #include <vector>
 
@@ -13,8 +14,17 @@ TEST(EmptyTensorTest, 1DTest) {
 }
 
 TEST(EmptyTensorTest, 2DTest) {
-  int64_t dims[2] = {2, 3};
-  Tensor t(dims);
+  int64_t dims[2]{2, 3};
+  // ArrayRef<int64_t>(dims, 2);
+  Tensor t(ArrayRef<int64_t>(dims, 2));
   EXPECT_EQ(t.numel(), 6) << "The created tensor has numel = " << t.numel();
   EXPECT_EQ(t.ndim(), 2) << "The created tensor has ndim = " << t.ndim();
+}
+
+TEST(ArrayRefTest, Conversion) {
+  int64_t dims[2]{2, 3};
+  ArrayRef<int64_t> arr(dims, 2);
+  EXPECT_EQ(arr.size(), 2);
+  EXPECT_EQ(arr[0], 2);
+  EXPECT_EQ(arr[1], 3);
 }

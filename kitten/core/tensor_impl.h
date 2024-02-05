@@ -16,15 +16,8 @@ public:
   TensorImpl(ArrayRef<int64_t> dims, DataType data_type,
              DeviceType device_type);
 
-  int ndim() { return ndim_; }
-
-  size_t numel() {
-    size_t n = 1;
-    for (int i = 0; i < ndim_; i++) {
-      n *= dims_[i];
-    }
-    return n;
-  }
+  int ndim();
+  size_t numel();
 
 protected:
   DataPtr data_ptr_;
