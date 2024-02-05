@@ -9,6 +9,7 @@ file(GLOB KITTEN_SRCS
 file(GLOB KITTEN_HEADERS
     core/*.h
     util/*.h
+    macro/*.h
 )
 add_library(kitten SHARED ${KITTEN_SRCS} ${KITTEN_HEADERS})
 

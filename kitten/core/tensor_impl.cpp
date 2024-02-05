@@ -1,6 +1,7 @@
 #include <kitten/core/cpu_allocator.h>
 #include <kitten/core/meta.h>
 #include <kitten/core/tensor_impl.h>
+#include <kitten/macro/assertion.h>
 
 #include <cassert>
 #include <cstddef>
@@ -14,10 +15,10 @@ TensorImpl::TensorImpl(ArrayRef<int64_t> dims, DataType data_type,
       allocator_(get_allocator(device_type)),
       ndim_(static_cast<int>(dims.size())) {
   // memory allocation
-  assert(data_type == DataType::F32);
-  assert(device_type == DeviceType::CPU);
-  assert(allocator_ != nullptr);
-  assert(ndim_ <= KITTEN_MAX_DIM);
+  KITTEN_ASSERT(data_type == DataType::F32);
+  KITTEN_ASSERT(device_type == DeviceType::CPU);
+  KITTEN_ASSERT_DEBUG(allocator_ != nullptr);
+  KITTEN_ASSERT(ndim_ <= KITTEN_MAX_DIM);
   size_t numel = 1;
   for (int i = 0; i < ndim_; i++) {
     dims_[i] = dims[i];

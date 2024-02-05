@@ -16,9 +16,14 @@ TEST(EmptyTensorTest, 1DTest) {
 TEST(EmptyTensorTest, 2DTest) {
   int64_t dims[2]{2, 3};
   // ArrayRef<int64_t>(dims, 2);
-  Tensor t(ArrayRef<int64_t>(dims, 2));
+  Tensor t(dims);
   EXPECT_EQ(t.numel(), 6) << "The created tensor has numel = " << t.numel();
   EXPECT_EQ(t.ndim(), 2) << "The created tensor has ndim = " << t.ndim();
+}
+
+TEST(EmptyTensorTest, DimToLarge) {
+  int64_t dims[6]{2, 3, 4, 5, 6};
+  ASSERT_DEATH(Tensor t(dims), ".*");
 }
 
 TEST(ArrayRefTest, Conversion) {
