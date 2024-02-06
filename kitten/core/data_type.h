@@ -42,15 +42,20 @@ constexpr char
 #undef STRINGIFY_HELPER_
     };
 
-class DataTypeMeta final {
-public:
-  DataTypeMeta(DataType dtype) : index_(static_cast<uint8_t>(dtype)) {}
-  uint8_t index() { return index_; }
-  size_t size() { return DataTypeSizes[index_]; }
-  const char *name() { return DataTypeNames[index_]; }
+struct DataTypeMeta final {
 
-private:
-  uint8_t index_;
+  const DataType dtype;
+
+  using IndexType = uint8_t;
+
+  DataTypeMeta(DataType dtype) : dtype(dtype) {}
+  constexpr IndexType index() { return static_cast<IndexType>(dtype); }
+  constexpr size_t size() {
+    return DataTypeSizes[static_cast<IndexType>(dtype)];
+  }
+  constexpr const char *name() {
+    return DataTypeNames[static_cast<IndexType>(dtype)];
+  }
 };
 
 } // namespace kitten
