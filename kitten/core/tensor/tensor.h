@@ -26,12 +26,6 @@ public:
 
   size_t numel() { return impl_->numel(); }
 
-  // TODO implementation of indexing API
-  /*
-  Tensor index(int64_t indices[]);
-  Tensor &index_put_(int64_t indices[], float value);
-  */
-
 protected:
   std::shared_ptr<TensorImpl> impl_;
 };

@@ -20,3 +20,5 @@
   while (false)                                                                \
   KITTEN_ASSERT(__VA_ARGS__)
 #endif // NDEBUG
+
+// TODO KITTEN_STATIC_ASSERT

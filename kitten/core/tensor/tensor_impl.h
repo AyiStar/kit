@@ -10,24 +10,25 @@
 
 namespace kitten {
 
-class TensorImpl {
-public:
+/// Make it a struct for convinience of implementing functions
+struct TensorImpl {
+
+  DataType dtype_;
+  DeviceType device_;
+  DataTypeMeta dtype_meta_;
+
+  DataPtr data_ptr_;
+  Allocator *allocator_;
+  std::size_t size_bytes_;
+
+  size_t dims_[KITTEN_MAX_DIM];
+  int ndim_;
+
   TensorImpl(int64_t dim0, DataType data_type, DeviceType device_type);
   TensorImpl(ArrayRef<int64_t> dims, DataType data_type,
              DeviceType device_type);
 
   int ndim();
   size_t numel();
-
-protected:
-  DataPtr data_ptr_;
-  Allocator *allocator_;
-  DataType data_type_;
-  DataTypeMeta dtype_meta_;
-  DeviceType device_type_;
-  std::size_t size_bytes_;
-
-  size_t dims_[KITTEN_MAX_DIM];
-  int ndim_;
 };
 } // namespace kitten

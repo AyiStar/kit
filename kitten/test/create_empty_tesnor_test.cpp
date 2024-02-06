@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <kitten/api/cpp/kitten.h>
+#include <kitten/api/cpp/include/kitten.h>
 #include <kitten/util/array_ref.h>
 
 #include <vector>

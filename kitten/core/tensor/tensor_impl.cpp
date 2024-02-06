@@ -11,7 +11,7 @@ namespace kitten {
 
 TensorImpl::TensorImpl(ArrayRef<int64_t> dims, DataType data_type,
                        DeviceType device_type)
-    : data_type_(data_type), dtype_meta_(data_type), device_type_(device_type),
+    : dtype_(data_type), dtype_meta_(data_type), device_(device_type),
       allocator_(get_allocator(device_type)),
       ndim_(static_cast<int>(dims.size())) {
   // memory allocation
