@@ -1,8 +1,8 @@
 #pragma once
 
-#include <kitten/core/data_ptr.h>
-#include <kitten/core/device_type.h>
-#include <kitten/core/meta.h>
+#include <kitten/core/alloc/data_ptr.h>
+#include <kitten/core/meta/config.h>
+#include <kitten/core/meta/device_type.h>
 
 namespace kitten {
 

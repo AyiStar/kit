@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
-#include <kitten/core/cpu_allocator.h>
-#include <kitten/core/tensor.h>
+#include <kitten/api/cpp/kitten.h>
 #include <kitten/util/array_ref.h>
 
 #include <vector>

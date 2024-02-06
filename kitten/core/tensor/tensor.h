@@ -1,9 +1,9 @@
 #pragma once
 
-#include <kitten/core/data_type.h>
-#include <kitten/core/device_type.h>
-#include <kitten/core/meta.h>
-#include <kitten/core/tensor_impl.h>
+#include <kitten/core/meta/config.h>
+#include <kitten/core/meta/data_type.h>
+#include <kitten/core/meta/device_type.h>
+#include <kitten/core/tensor/tensor_impl.h>
 #include <kitten/util/array_ref.h>
 
 #include <cstdint>

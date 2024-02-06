@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kitten/core/meta.h>
+#include <kitten/core/meta/config.h>
 
 #include <cstddef>
 #include <cstdint>

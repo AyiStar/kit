@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kitten/core/device_type.h>
+#include <kitten/core/meta/device_type.h>
 
 #include <memory>
 

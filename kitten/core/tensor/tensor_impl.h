@@ -1,9 +1,9 @@
 #pragma once
 
-#include <kitten/core/allocator.h>
-#include <kitten/core/data_ptr.h>
-#include <kitten/core/data_type.h>
-#include <kitten/core/device_type.h>
+#include <kitten/core/alloc/allocator.h>
+#include <kitten/core/alloc/data_ptr.h>
+#include <kitten/core/meta/data_type.h>
+#include <kitten/core/meta/device_type.h>
 #include <kitten/util/array_ref.h>
 
 #include <cstdint>

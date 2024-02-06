@@ -1,4 +1,4 @@
-#include <kitten/core/cpu_allocator.h>
+#include <kitten/core/alloc/cpu_allocator.h>
 
 namespace kitten {
 

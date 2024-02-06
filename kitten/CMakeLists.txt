@@ -3,11 +3,16 @@ cmake_minimum_required(VERSION 3.20)
 project(KitTen C CXX)
 
 file(GLOB KITTEN_SRCS
-    core/*.cpp
+    core/tensor/*.cpp
+    core/graph/*.cpp
+    core/alloc/*.cpp
     util/*.cpp
 )
 file(GLOB KITTEN_HEADERS
-    core/*.h
+    core/tensor/*.h
+    core/graph/*.h
+    core/alloc/*.h
+    core/meta/*.h
     util/*.h
     macro/*.h
 )

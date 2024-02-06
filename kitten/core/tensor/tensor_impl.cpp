@@ -1,6 +1,6 @@
-#include <kitten/core/cpu_allocator.h>
-#include <kitten/core/meta.h>
-#include <kitten/core/tensor_impl.h>
+#include <kitten/core/alloc/cpu_allocator.h>
+#include <kitten/core/meta/config.h>
+#include <kitten/core/tensor/tensor_impl.h>
 #include <kitten/macro/assertion.h>
 
 #include <cassert>

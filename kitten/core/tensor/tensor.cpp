@@ -1,3 +1,3 @@
-#include <kitten/core/tensor.h>
+#include <kitten/core/tensor/tensor.h>
 
 namespace kitten {} // namespace kitten
