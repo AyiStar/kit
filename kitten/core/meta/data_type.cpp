@@ -2,7 +2,6 @@
 
 namespace kitten {
 
-constexpr uint8_t NumDataTypes = static_cast<uint8_t>(DataType::NumTypes);
 constexpr size_t DataTypeSizes[NumDataTypes]{
 #define DEFINE_DATATYPE_SIZE_VAL_(type, name) sizeof(type),
     KITTEN_FORALL_DATA_TYPES(DEFINE_DATATYPE_SIZE_VAL_)
@@ -17,15 +16,15 @@ constexpr char
 #undef STRINGIFY_HELPER_
     };
 
-constexpr DataTypeMeta::IndexType DataTypeMeta::index() {
+DataTypeMeta::IndexType DataTypeMeta::index() {
   return static_cast<IndexType>(dtype);
 }
 
-constexpr size_t DataTypeMeta::size() {
+size_t DataTypeMeta::size() {
   return DataTypeSizes[static_cast<IndexType>(dtype)];
 }
 
-constexpr const char *DataTypeMeta::name() {
+const char *DataTypeMeta::name() {
   return DataTypeNames[static_cast<IndexType>(dtype)];
 }
 

@@ -3,8 +3,8 @@
 namespace kitten {
 
 #define KITTEN_FORALL_OP_TYPES(_)                                              \
-  _(NONE, None)                                                                \
-  _(ADD, Add)
+  _(NOP, nop)                                                                  \
+  _(ADD, add)
 
 enum class OpType : uint16_t {
 #define DEFINE_OPTYPE_ENUM_VAL_(type, name) name,
@@ -15,5 +15,15 @@ enum class OpType : uint16_t {
 };
 
 constexpr uint16_t NumOpTypes = static_cast<uint16_t>(OpType::NumTypes);
+
+struct OpTypeMeta final {
+
+  const OpType optype;
+
+  using IndexType = uint16_t;
+
+  OpTypeMeta(OpType optype) : optype(optype) {}
+  IndexType index();
+};
 
 } // namespace kitten

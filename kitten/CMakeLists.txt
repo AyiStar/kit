@@ -6,6 +6,7 @@ file(GLOB KITTEN_SRCS
     core/tensor/*.cpp
     core/graph/*.cpp
     core/alloc/*.cpp
+    core/meta/*.cpp
     util/*.cpp
 )
 file(GLOB KITTEN_HEADERS

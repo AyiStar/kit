@@ -5,7 +5,7 @@
 
 namespace kitten {
 
-Allocator *allocator_array[KITTEN_MAX_NUM_DEVICE_TYPES];
+Allocator *allocator_array[NumDeviceTypes];
 
 void set_allocator(const DeviceType &device_type, Allocator *allocator) {
   allocator_array[static_cast<int>(device_type)] = allocator;

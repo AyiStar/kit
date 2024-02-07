@@ -27,6 +27,8 @@ enum class DataType : uint8_t {
   NumTypes
 };
 
+constexpr uint8_t NumDataTypes = static_cast<uint8_t>(DataType::NumTypes);
+
 struct DataTypeMeta final {
 
   const DataType dtype;
@@ -34,9 +36,9 @@ struct DataTypeMeta final {
   using IndexType = uint8_t;
 
   DataTypeMeta(DataType dtype) : dtype(dtype) {}
-  constexpr IndexType index();
-  constexpr size_t size();
-  constexpr const char *name();
+  IndexType index();
+  size_t size();
+  const char *name();
 };
 
 } // namespace kitten
