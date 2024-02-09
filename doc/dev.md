@@ -27,5 +27,6 @@
 
 ## TODO List
 
-### Dispatching Mechanism
+### Operator Register-Dispatch Mechanism
 
+- Pytorch's dispatch: https://zhuanlan.zhihu.com/p/386876377
