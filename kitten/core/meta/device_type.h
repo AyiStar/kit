@@ -3,7 +3,7 @@
 #include <cstdint>
 
 namespace kitten {
-enum class DeviceType : uint8_t { CPU, Undefined, NumTypes };
+enum class DeviceType : uint16_t { CPU, NumTypes };
 
 constexpr int NumDeviceTypes = static_cast<uint8_t>(DeviceType::NumTypes);
 

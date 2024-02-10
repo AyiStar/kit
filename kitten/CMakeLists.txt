@@ -7,6 +7,7 @@ file(GLOB KITTEN_SRCS
     core/graph/*.cpp
     core/alloc/*.cpp
     core/meta/*.cpp
+    core/dispatch/*.cpp
     util/*.cpp
 )
 file(GLOB KITTEN_HEADERS
@@ -14,6 +15,7 @@ file(GLOB KITTEN_HEADERS
     core/graph/*.h
     core/alloc/*.h
     core/meta/*.h
+    core/dispatch/*.h
     util/*.h
     macro/*.h
 )

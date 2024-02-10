@@ -23,8 +23,7 @@ enum class DataType : uint8_t {
 #define DEFINE_DATATYPE_ENUM_VAL_(type, name) name,
   KITTEN_FORALL_DATA_TYPES(DEFINE_DATATYPE_ENUM_VAL_)
 #undef DEFINE_DATATYPE_ENUM_VAL_
-      Undefined,
-  NumTypes
+      NumTypes
 };
 
 constexpr uint8_t NumDataTypes = static_cast<uint8_t>(DataType::NumTypes);
