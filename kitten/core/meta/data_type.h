@@ -30,10 +30,11 @@ constexpr uint8_t NumDataTypes = static_cast<uint8_t>(DataType::NumTypes);
 
 struct DataTypeMeta final {
 
-  const DataType dtype;
+  DataType dtype;
 
   using IndexType = uint8_t;
 
+  DataTypeMeta() = default;
   DataTypeMeta(DataType dtype) : dtype(dtype) {}
   IndexType index();
   size_t size();
