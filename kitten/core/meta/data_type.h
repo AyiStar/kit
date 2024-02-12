@@ -28,6 +28,21 @@ enum class DataType : uint8_t {
 
 constexpr uint8_t NumDataTypes = static_cast<uint8_t>(DataType::NumTypes);
 
+template <DataType dtype>
+struct dtype_to_ctype;
+
+#define SPECIALIZE_DataTypeToCPPType(cpp_type, data_type)                      \
+  template <>                                                                  \
+  struct dtype_to_ctype<DataType::data_type> {                                 \
+    using type = cpp_type;                                                     \
+  };
+
+KITTEN_FORALL_DATA_TYPES(SPECIALIZE_DataTypeToCPPType)
+#undef SPECIALIZE_DataTypeToCPPType
+
+template <DataType dtype>
+using dtype_to_ctype_t = typename dtype_to_ctype<dtype>::type;
+
 struct DataTypeMeta final {
 
   DataType dtype;
