@@ -1,5 +1,6 @@
 #pragma once
 
+#include <kitten/core/meta/data_type.h>
 #include <kitten/core/meta/device_type.h>
 
 #include <memory>
@@ -20,14 +21,11 @@ public:
   DataPtr(void *data, DeviceType device, void *ctx, DeletePtrFn deleter)
       : data_(data), ctx_(ctx, deleter), device_(device) {}
 
-  template <typename T>
-  T *raw_data() {
-    return reinterpret_cast<T *>(data_);
-  }
+  void *raw_data() { return data_; }
 
   template <DataType dtype>
   dtype_to_ctype_t<dtype> *data() {
-    return raw_data<dtype_to_ctype_t<dtype>>();
+    return reinterpret_cast<dtype_to_ctype_t<dtype> *>(data_);
   }
 
 private:

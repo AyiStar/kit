@@ -15,15 +15,16 @@
 
 namespace kitten {
 
-template <DeviceType device = DeviceType::CPU>
+template <DeviceType device_type = DeviceType::CPU,
+          DataType data_type = DataType::F32>
 class Tensor {
 
 public:
   Tensor() = default;
 
-  Tensor(ArrayRef<int64_t> dims, DataType dtype = DataType::F32)
-      : dtype_(dtype), dtype_meta_(dtype), device_(device),
-        allocator_(get_allocator(device)),
+  Tensor(ArrayRef<int64_t> dims)
+      : dtype_(data_type), dtype_meta_(data_type), device_(device_type),
+        allocator_(get_allocator(device_type)),
         ndim_(static_cast<int>(dims.size())) {
     // memory allocation
     KITTEN_ASSERT(dtype_ == DataType::F32, "Currently only support F32");
@@ -35,13 +36,12 @@ public:
       dims_[i] = dims[i];
       numel *= dims[i];
     }
-    size_t n_bytes = dtype_meta_.size() * numel;
-    auto allocated_data_ptr = allocator_->allocate(n_bytes);
+    size_bytes_ = dtype_meta_.size() * numel;
+    auto allocated_data_ptr = allocator_->allocate(size_bytes_);
     data_ptr_ = std::move(allocated_data_ptr);
   }
 
-  Tensor(int64_t dim0, DataType dtype = DataType::F32)
-      : Tensor(ArrayRef<int64_t>(dim0), dtype) {}
+  Tensor(int64_t dim0) : Tensor(ArrayRef<int64_t>(dim0)) {}
 
   int ndim() { return ndim_; }
 
@@ -52,6 +52,19 @@ public:
     }
     return n;
   }
+
+  DataType dtype() { return dtype_; }
+
+  DeviceType device() { return device_; }
+
+  void *raw_data() { return data_ptr_.raw_data(); }
+
+  template <DataType data_type>
+  dtype_to_ctype_t<data_type> *data() {
+    return data_ptr_.data<data_type>();
+  }
+
+  size_t size_bytes() { return size_bytes_; }
 
 protected:
   DataType dtype_;
