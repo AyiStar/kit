@@ -1,6 +1,7 @@
 #pragma once
 
 #include <kitten/core/alloc/cpu_allocator.h>
+#include <kitten/core/alloc/data_ptr.h>
 #include <kitten/core/meta/config.h>
 #include <kitten/core/meta/data_type.h>
 #include <kitten/core/meta/device_type.h>
@@ -15,22 +16,17 @@
 
 namespace kitten {
 
-template <DeviceType device_type = DeviceType::CPU,
-          DataType data_type = DataType::F32>
+template <int rank, DataType data_type = DataType::F32,
+          DeviceType device_type = DeviceType::CPU>
 class Tensor {
 
 public:
-  Tensor() = default;
-
   Tensor(ArrayRef<int64_t> dims)
       : dtype_(data_type), dtype_meta_(data_type), device_(device_type),
-        allocator_(get_allocator(device_type)),
-        ndim_(static_cast<int>(dims.size())) {
+        allocator_(get_allocator(device_type)), ndim_(rank) {
     // memory allocation
-    KITTEN_ASSERT(dtype_ == DataType::F32, "Currently only support F32");
-    KITTEN_ASSERT(device_ == DeviceType::CPU, "Currently only support CPU");
+    KITTEN_ASSERT(rank == static_cast<int>(dims.size()));
     KITTEN_ASSERT_DEBUG(allocator_ != nullptr);
-    KITTEN_ASSERT(ndim_ <= KITTEN_MAX_DIM);
     size_t numel = 1;
     for (int i = 0; i < ndim_; i++) {
       dims_[i] = dims[i];
@@ -41,9 +37,11 @@ public:
     data_ptr_ = std::move(allocated_data_ptr);
   }
 
-  Tensor(int64_t dim0) : Tensor(ArrayRef<int64_t>(dim0)) {}
+  consteval int ndim() { return rank; }
 
-  int ndim() { return ndim_; }
+  consteval DataType dtype() { return data_type; }
+
+  consteval DeviceType device() { return device_type; }
 
   size_t numel() {
     size_t n = 1;
@@ -53,30 +51,25 @@ public:
     return n;
   }
 
-  DataType dtype() { return dtype_; }
-
-  DeviceType device() { return device_; }
-
   void *raw_data() { return data_ptr_.raw_data(); }
 
-  template <DataType data_type>
   dtype_to_ctype_t<data_type> *data() {
+    // return reinterpret_cast<dtype_to_ctype_t<dtype> *>(data_ptr.raw_data());
     return data_ptr_.data<data_type>();
   }
 
   size_t size_bytes() { return size_bytes_; }
 
 protected:
-  DataType dtype_;
-  DeviceType device_;
+  const int ndim_;
+  const DataType dtype_;
+  const DeviceType device_;
   DataTypeMeta dtype_meta_;
 
   DataPtr data_ptr_;
   Allocator *allocator_;
   std::size_t size_bytes_;
-
-  size_t dims_[KITTEN_MAX_DIM];
-  int ndim_;
+  size_t dims_[rank];
 };
 
 } // namespace kitten

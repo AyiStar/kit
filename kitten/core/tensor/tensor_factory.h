@@ -11,45 +11,46 @@ namespace kitten {
 
 // TODO implementation of basic factories
 
-template <DeviceType device = DeviceType::CPU, DataType dtype = DataType::F32>
-Tensor<device, dtype> zeros(ArrayRef<int64_t> dims) {
-  KITTEN_ASSERT(false, "Not implemented yet");
+template <int rank, DataType dtype, DeviceType device>
+Tensor<rank, dtype, device> zeros(ArrayRef<int64_t> dims) {
+  KITTEN_ASSERT(false, "Factory zeros(): not implemented yet");
 }
 
-template <DeviceType device = DeviceType::CPU, DataType dtype = DataType::F32>
-Tensor<device, dtype> ones(ArrayRef<int64_t> dims) {
-  KITTEN_ASSERT(false, "Not implemented yet");
+template <int rank, DataType dtype, DeviceType device>
+Tensor<rank, dtype, device> ones(ArrayRef<int64_t> dims) {
+  KITTEN_ASSERT(false, "Factory ones(): not implemented yet");
 }
 
-template <DeviceType device = DeviceType::CPU, DataType dtype = DataType::F32>
-Tensor<device, dtype> full(ArrayRef<int64_t> dims, float fill_value) {
-  KITTEN_ASSERT(false, "Not implemented yet");
+template <int rank, DataType dtype, DeviceType device>
+Tensor<rank, dtype, device> full(ArrayRef<int64_t> dims, float value) {
+  KITTEN_ASSERT(false, "Factory full: not implemented yet");
 }
 
-template <DeviceType device = DeviceType::CPU, DataType dtype = DataType::F32>
-Tensor<device> eye(ArrayRef<int64_t> dims) {
-  KITTEN_ASSERT(false, "Not implemented yet");
+/* CPU Implementations */
+template <int rank, DataType dtype, DeviceType device>
+  requires(device == DeviceType::CPU)
+Tensor<rank, dtype, device> zeros(ArrayRef<int64_t> dims) {
+  Tensor<rank, dtype, device> t(dims);
+  memset(t.raw_data(), 0, t.size_bytes());
+  return t;
 }
 
-template <DeviceType device, DataType dtype = DataType::F32>
-Tensor<device> rand(ArrayRef<int64_t> dims) {
-  KITTEN_ASSERT(false, "Not implemented yet");
+template <int rank, DataType dtype, DeviceType device>
+  requires(device == DeviceType::CPU)
+Tensor<rank, dtype, device> ones(ArrayRef<int64_t> dims) {
+  return full<rank, dtype, device>(dims, 1);
 }
 
-template <DeviceType device, DataType dtype = DataType::F32>
-Tensor<device> randn(ArrayRef<int64_t> dims) {
-  KITTEN_ASSERT(false, "Not implemented yet");
+template <int rank, DataType dtype, DeviceType device>
+  requires(device == DeviceType::CPU)
+Tensor<rank, dtype, device> full(ArrayRef<int64_t> dims, float value) {
+  Tensor<rank, dtype, device> t(dims);
+  auto *data = t.data();
+  size_t numel = t.numel();
+  for (size_t i = 0; i < numel; i++) {
+    data[i] = value;
+  }
+  return t;
 }
-
-/* Implementation Prototypes */
-extern template Tensor<DeviceType::CPU, DataType dtype>
-zeros<DeviceType::CPU>(ArrayRef<int64_t> dims);
-
-extern template Tensor<DeviceType::CPU>
-ones<DeviceType::CPU>(ArrayRef<int64_t> dims, DataType dtype = DataType::F32);
-
-extern template Tensor<DeviceType::CPU>
-full<DeviceType::CPU>(ArrayRef<int64_t> dims, float value,
-                      DataType dtype = DataType::F32);
 
 } // namespace kitten

@@ -5,19 +5,26 @@
 #include <kitten/macro/assertion.h>
 
 namespace kitten {
-template <OpType op, DeviceType device>
-Tensor<device> binaryOp(const Tensor<device> &a, const Tensor<device> &b) {
+template <OpType op, int rank, DataType dtype, DeviceType device>
+Tensor<rank, dtype, device>
+tensorBinaryOp(const Tensor<rank, dtype, device> &a,
+               const Tensor<rank, dtype, device> &b) {
   static_assert(static_cast<uint16_t>(op) < NumOpTypes, "Undefined operator");
+  static_assert(static_cast<uint16_t>(dtype) < NumDataTypes,
+                "Undefined data type");
   static_assert(static_cast<uint16_t>(device) < NumDeviceTypes,
                 "Undefined device");
   KITTEN_ASSERT(false, "The operator ", OpTypeMeta(op).name(),
                 " has not been implemented");
 }
 
-template <OpType op, DeviceType device>
+template <OpType op, int rank, DataType dtype, DeviceType device>
   requires(op == OpType::NOP)
-Tensor<device> binaryOp(const Tensor<device> &a, const Tensor<device> &b) {
-  return {};
+Tensor<rank, dtype, device>
+tensorBinaryOp(const Tensor<rank, dtype, device> &a,
+               const Tensor<rank, dtype, device> &b) {
+  int64_t zero_dims[rank] = {0};
+  return Tensor<rank, dtype, device>(zero_dims);
 }
 
 } // namespace kitten
