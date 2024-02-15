@@ -9,7 +9,7 @@
 
 namespace kitten {
 
-// TODO implementation of basic factories
+// basic factories
 
 template <int rank, DataType dtype, DeviceType device>
 Tensor<rank, dtype, device> zeros(ArrayRef<int64_t> dims) {

@@ -21,3 +21,11 @@ TEST(TensorFactoryTest, Ones) {
   EXPECT_EQ(t.size_bytes(), 10 * 20 * sizeof(float));
   EXPECT_EQ(*t.data(), 1);
 }
+
+TEST(TensorFactoryTest, Full) {
+  int64_t dims[2] = {10, 20};
+  Tensor t = full<2, DataType::F32, DeviceType::CPU>(dims, 5);
+  EXPECT_EQ(t.device(), DeviceType::CPU);
+  EXPECT_EQ(t.size_bytes(), 10 * 20 * sizeof(float));
+  EXPECT_EQ(*t.data(), 5);
+}

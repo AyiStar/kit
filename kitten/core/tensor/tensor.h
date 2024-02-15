@@ -9,6 +9,7 @@
 #include <kitten/macro/assertion.h>
 #include <kitten/util/array_ref.h>
 
+#include <array>
 #include <cstddef>
 #include <cstdint>
 #include <initializer_list>
@@ -53,12 +54,21 @@ public:
 
   void *raw_data() { return data_ptr_.raw_data(); }
 
-  dtype_to_ctype_t<data_type> *data() {
-    // return reinterpret_cast<dtype_to_ctype_t<dtype> *>(data_ptr.raw_data());
-    return data_ptr_.data<data_type>();
-  }
+  ctype *data() { return data_ptr_.data<data_type>(); }
 
   size_t size_bytes() { return size_bytes_; }
+
+  ctype &at(std::array<size_t, rank> indices) {
+    auto *data = data();
+    size_t flat_index = 0;
+    for (int i = 0; i < rank; i++) {
+      // TODO: layout?
+    }
+    return *(data + flat_index);
+  }
+
+public:
+  using ctype = dtype_to_ctype_t<data_type>;
 
 protected:
   const int ndim_;
