@@ -5,8 +5,8 @@
 namespace kitten {
 
 #define KITTEN_FORALL_IRNODE_TYPES(_)                                          \
-  _(IMM, Imm)                                                                  \
-  _(ADD, add)
+  _(Imm, imm)                                                                  \
+  _(Add, add)
 
 enum class IRNodeType : uint16_t {
 #define DEFINE_IRNODE_ENUM_VAL_(type, name) type,
